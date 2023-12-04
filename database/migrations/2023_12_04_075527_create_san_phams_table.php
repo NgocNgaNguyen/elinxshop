@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\QueryException;
 
 return new class extends Migration
 {
@@ -21,8 +22,7 @@ return new class extends Migration
             $table->double('dongia');
             $table->double('khuyenmai');
             $table->double('dongia_khuyenmai');
-            $table->string('baohanh');
-            $table->text('motasanpham')->nullable();
+            $table->string('baohanh')->nullable();
             $table->string('hinhanh')->nullable();
             $table->text('motasanpham')->nullable();
             $table->timestamps();

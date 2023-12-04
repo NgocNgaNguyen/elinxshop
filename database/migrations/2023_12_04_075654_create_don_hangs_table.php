@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('donhang', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nguoidung_id')->constrained('users');
+            $table->foreignId('nguoidung_id')->constrained('nguoidung');
             // $table->foreignId('tinhtrang_id')->constrained('tinhtrang');
             $table->string('dienthoaigiaohang', 10);
             $table->string('diachigiaohang');
-            $table->string('tinhtrang');
+            $table->string('tinhtrang')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
 
