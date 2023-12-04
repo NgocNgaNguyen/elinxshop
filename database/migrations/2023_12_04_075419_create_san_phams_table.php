@@ -11,9 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('san_phams', function (Blueprint $table) {
+        Schema::create('sanpham', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('loaisanpham_id')->constrained('loaisanpham');
+            $table->foreignId('hangsanxuat_id')->constrained('hangsanxuat');
+            $table->string('tensanpham');
+            $table->string('tensanpham_slug');
+            $table->integer('soluong');
+            $table->double('dongia');
+            $table->double('khuyenmai');
+            $table->double('dongia_khuyenmai');
+            $table->string('baohanh');
+            $table->text('motasanpham')->nullable();
+            $table->string('hinhanh')->nullable();
+            $table->text('motasanpham')->nullable();
             $table->timestamps();
+            $table->engine = 'InnoDB';
         });
     }
 
@@ -22,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('san_phams');
+        Schema::dropIfExists('sanpham');
     }
 };

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hang_san_xuats', function (Blueprint $table) {
+        Schema::create('hangsanxuat', function (Blueprint $table) {
             $table->id();
+            $table->string('tenhang');
+            $table->string('tenhang_slug');
+            $table->string('hinhanh')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
         });
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hang_san_xuats');
+        Schema::dropIfExists('hangsanxuat');
     }
 };
