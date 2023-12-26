@@ -3,8 +3,10 @@
 <div class="card">
     <div class="card-header">Đơn hàng</div>
     <div class="card-body table-responsive">
-
-        <p><a href="{{ route('admin.donhang.them') }}" class="btn btn-info"><i class="bi bi-plus"></i> Thêm mới</a></p>
+        <p>
+            <a href="{{ route('admin.donhang.them') }}" class="btn btn-info"><i class="bi bi-plus"></i> Thêm mới</a>
+            <a href="{{ route('frontend.dathangdemo') }}" class="btn btn-success"><i class="fal fa-plus"></i> Đặt hàng demo</a>
+        </p>
         <table class="table table-bordered table-hover table-sm mb-0">
             <thead>
                 <tr>
