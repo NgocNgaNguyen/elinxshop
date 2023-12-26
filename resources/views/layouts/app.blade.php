@@ -6,100 +6,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
     <!-- CSS -->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{ asset('public/vendor/font-awesome/css/all.min.css') }}" />
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" />
+    @yield('css')
+    <link rel="stylesheet" href="{{ asset('public/css/site.css') }}" />
     <!-- Scripts -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    @yield('javascript')
 </head>
 
 <body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-info">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ route('frontend') }}">
-                    <i class="fa-light fa-cart-shopping"></i> {{ config('app.name', 'Laravel') }}
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ route('admin.home') }}">
+                    {{ config('app.name', 'Laravel') }}
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left side of Navbar -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('loaisanpham') }}"><i
-                                    class="fa-light fa-fw fa-diagram-project"></i> Loại sản phẩm</a>
+                            <a class="nav-link" href="{{ route('admin.loaisanpham') }}"><i class="bi bi-list"></i> Loại sản phẩm</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('hangsanxuat') }}"><i
-                                    class="fa-light fa-fw fa-copyright"></i> Hãng sản xuất</a>
+                            <a class="nav-link" href="{{ route('admin.hangsanxuat') }}"><i class="bi bi-list"></i> Hãng sản xuất</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('sanpham') }}"><i class="fa-light fa-fw fa-box"></i> Sản
-                                phẩm</a>
+                            <a class="nav-link" href="{{ route('admin.sanpham') }}"><i class="bi bi-box"></i> Sản phẩm</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tinhtrang') }}"><i
-                                    class="fa-light fa-fw fa-list-check"></i> Tình trạng</a>
+                            <a class="nav-link" href="{{ route('admin.tinhtrang') }}"><i class="bi bi-box"></i> Tình trạng</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('donhang') }}"><i
-                                    class="fa-light fa-fw fa-file-invoice"></i> Đơn hàng</a>
+                            <a class="nav-link" href="{{ route('admin.donhang') }}"><i class="bi bi-receipt"></i> Đơn hàng</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('nguoidung') }}"><i class="fa-light fa-fw fa-users"></i>
-                                Tài khoản</a>
+                            <a class="nav-link" href="{{ route('admin.nguoidung') }}"><i class="bi bi-people"></i> Tài khoản</a>
+                        </li>
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="{{ route('admin.chude') }}"><i class="fa-light fa-fw fa-list-check"></i> Chủ đề</a>
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="{{ route('admin.baiviet') }}"><i class="fa-light fa-fw fa-file-invoice"></i> Bài viết</a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link" href="{{ route('admin.binhluanbaiviet') }}"><i class="fa-light fa-fw fa-users"></i> Bình luận</a>
                         </li>
                     </ul>
-                    <!-- Right side of Navbar -->
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}"><i
-                                    class="fa-light fa-fw fa-sign-in-alt"></i> Đăng nhập</a>
+                            <a class="nav-link" href="{{ route('login') }}"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a>
                         </li>
                         @endif
-                        @if (Route::has('register'))<li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}"><i class="fa-light fa-user-plus"></i>
-                                Đăng ký</a>
+
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}"><i class="bi bi-person-plus"></i> Đăng ký</a>
                         </li>
                         @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#nguoidung" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-light fa-user-circle"></i> {{ Auth::user()->name }}
+                        <!-- <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
                             </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                    <i class="fa-light fa-fw fa-sign-out-alt"></i> Đăng xuất
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Đăng xuất
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="post" class="d-none">
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
                             </div>
+                        </li> -->
+                        <li class="nav-item">
+                            <span class="nav-link">{{ Auth::user()->name }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-link nav-link">Đăng xuất</button>
+                            </form>
                         </li>
                         @endguest
+                        <!-- @guest
+                        @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Đăng nhập</a>
+                        </li>
+                        @endif
+
+                        @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Đăng ký</a>
+                        </li>
+                        @endif
+                        @else
+                        <li class="nav-item">
+                            <span class="nav-link">{{ Auth::user()->name }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-link nav-link">Đăng xuất</button>
+                            </form>
+                        </li>
+                        @endguest -->
                     </ul>
                 </div>
             </div>
         </nav>
-        <main class="pt-3">
+
+        <main class="py-4">
             @yield('content')
         </main>
-        <hr class="shadow-sm" />
-        <footer>Bản quyền &copy; {{ date('Y') }} bởi {{ config('app.name', 'Laravel') }}.</footer>
     </div>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    @yield('javascript')
 </body>
 
 </html>
