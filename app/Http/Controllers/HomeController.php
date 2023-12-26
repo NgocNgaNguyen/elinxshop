@@ -41,6 +41,6 @@ class HomeController extends Controller
         // Gởi email
         Mail::to(Auth::user()->email)->send(new DatHangThanhCongEmail($donhang));
         
-        return redirect()->route('frontend);
+        return redirect()->route('frontend');
     }
 }
