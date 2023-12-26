@@ -121,6 +121,7 @@ class HomeController extends Controller
         $donhang->diachigiaohang = 'An Giang';
         $donhang->save();
 
+<<<<<<< HEAD
         //them don hang chi tiet
         $dhct = new DonHang_ChiTiet();
         $dhct->donhang_id = $donhang->id;
@@ -138,5 +139,14 @@ class HomeController extends Controller
 
         Mail::to(Auth::user()->email)->send(new DatHangEmail($donhang));
         return redirect()->route('donhang');
+=======
+        $donhang_chitiet->soluongban = 1;
+        $donhang_chitiet->dongiaban = 350000;
+        $donhang_chitiet->save();
+        // Gởi email
+        Mail::to(Auth::user()->email)->send(new DatHangThanhCongEmail($donhang));
+        
+        return redirect()->route('frontend');
+>>>>>>> eb0564399e36730454d1328ad4e78b4dc47a6a2f
     }
 }
