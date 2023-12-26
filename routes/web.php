@@ -20,3 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Liên kết gởi email khi đặt hàng thành công
+Route::get('/dathangdemo', [HomeController::class, 'getDatHangDemo'])->name('frontend.dathangdemo');
