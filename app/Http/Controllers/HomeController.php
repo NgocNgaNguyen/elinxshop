@@ -2,90 +2,167 @@
 
 namespace App\Http\Controllers;
 
+use Socialite;
 use App\Models\DonHang;
 use App\Models\DonHang_ChiTiet;
 use App\Mail\DatHangEmail;
+use App\Models\HangSanXuat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Models\LoaiSanPham;
+use App\Models\SanPham;
+use App\Models\ChuDe;
+use App\Models\BaiViet;
+use App\Models\BaiViet_ChiTiet;
+use App\Models\TuyenDung;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class HomeController extends Controller
 {
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
-    // /**
-    //  * Show the application dashboard.
-    //  *
-    //  * @return \Illuminate\Contracts\Support\Renderable
-    //  */
     public function getHome()
     {
-        return view('home');
+        $loaisanpham = LoaiSanPham::all();
+        $hangsanxuat = HangSanXuat::all();
+        return view('frontend.home', compact('loaisanpham', 'hangsanxuat'));
     }
     public function getSanPham($tenloai_slug = '')
     {
-        // Bổ sung code tại đây
-        return view('frontend.sanpham');
-    }
+        // Lấy thông tin loại sản phẩm dựa trên tenloai_slug
+        $loaisanpham = LoaiSanPham::where('tenloai_slug', $tenloai_slug)->first();
 
+        // Nếu không tìm thấy loại sản phẩm, có thể xử lý tùy chọn như hiển thị trang lỗi hoặc chuyển hướng
+        if (!$loaisanpham) {
+            abort(404); // Trả về trang 404 Not Found
+        }
+
+        // Lấy danh sách sản phẩm thuộc loại sản phẩm
+        $dssp = SanPham::where('loaisanpham_id', $loaisanpham->id)->get();
+
+        // Truyền loại sản phẩm và danh sách sản phẩm vào view bằng compact
+        return view('frontend.sanpham', compact('loaisanpham', 'dssp'));
+    }
     public function getSanPham_ChiTiet($tenloai_slug = '', $tensanpham_slug = '')
     {
-        // Bổ sung code tại đây
-        return view('frontend.sanpham_chitiet');
-    }
 
+        // Tìm thông tin sản phẩm dựa trên các tham số nhận được
+        $sanpham = SanPham::join('loaisanpham', 'sanpham.loaisanpham_id', '=', 'loaisanpham.id')
+            ->where('loaisanpham.tenloai_slug', $tenloai_slug)
+            ->where('sanpham.tensanpham_slug', $tensanpham_slug)
+            ->first();
+
+        // Kiểm tra xem sản phẩm có tồn tại không
+        if (!$sanpham) {
+            abort(404); // Trả về trang 404 Not Found
+        }        
+        
+        return view('frontend.sanpham_chitiet', compact('sanpham'));
+    }
     public function getBaiViet($tenchude_slug = '')
     {
-        // Bổ sung code tại đây
-        return view('frontend.baiviet');
+        if (empty($tenchude_slug)) {
+            $title = 'Bài viết';
+            $baiviet = BaiViet::where('kichhoat', 1)
+                ->where('kiemduyet', 1)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
+        } else {
+            $chude = ChuDe::where('tenchude_slug', $tenchude_slug)->firstOrFail();
+            $title = $chude->tenchude;
+            $baiviet = BaiViet::where('kichhoat', 1)
+                ->where('kiemduyet', 1)
+                ->where('chude_id', $chude->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(20);
+        }
+        return view('frontend.baiviet', compact('title', 'baiviet'));
     }
-
     public function getBaiViet_ChiTiet($tenchude_slug = '', $tieude_slug = '')
     {
-        // Bổ sung code tại đây
-        return view('frontend.baiviet_chitiet');
+        $tieude_id = explode('.', $tieude_slug);
+        $tieude = explode('-', $tieude_id[0]);
+        $baiviet_id = $tieude[count($tieude) - 1];
+        $baiviet = BaiViet::where('kichhoat', 1)
+            ->where('kiemduyet', 1)
+            ->where('id', $baiviet_id)
+            ->firstOrFail();
+        if (!$baiviet)
+            abort(404);
+        // Cập nhật lượt xem
+        $daxem = 'BV' . $baiviet_id;
+        if (!session()->has($daxem)) {
+            $orm = BaiViet::find($baiviet_id);
+            $orm->luotxem = $baiviet->luotxem + 1;
+            $orm->save();
+            session()->put($daxem, 1);
+        }
+        $baivietcungchuyemuc = BaiViet::where('kichhoat', 1)
+            ->where('kiemduyet', 1)
+            ->where('chude_id', $baiviet->chude_id)
+            ->where('id', '!=', $baiviet_id)
+            ->orderBy('created_at', 'desc')
+            ->take(4);
+        return view('frontend.baiviet_chitiet', compact('baiviet', 'baivietcungchuyemuc'));
     }
     public function getGioHang()
     {
-        // Bổ sung code tại đây
-        return view('frontend.giohang');
+        if (Cart::count() > 0)
+            return view('frontend.giohang');
+        else
+            return view('frontend.giohangrong');
     }
-
     public function getGioHang_Them($tensanpham_slug = '')
     {
-        // Bổ sung code tại đây
+        $sanpham = SanPham::where('tensanpham_slug', $tensanpham_slug)->first();
+        Cart::add([
+            'id' => $sanpham->id,
+            'name' => $sanpham->tensanpham,
+            'qty' => 1,
+            'price' => $sanpham->dongia,
+            'weight' => 0,
+            'options' => [
+                'image' => $sanpham->hinhanh
+            ]
+        ]);
         return redirect()->route('frontend.home');
     }
 
     public function getGioHang_Xoa($row_id)
     {
-        // Bổ sung code tại đây
+        Cart::remove($row_id);
         return redirect()->route('frontend.giohang');
     }
 
     public function getGioHang_Giam($row_id)
     {
-        // Bổ sung code tại đây
+        $row = Cart::get($row_id);
+        // Nếu số lượng là 1 thì không giảm được nữa
+        if ($row->qty > 1) {
+            Cart::update($row_id, $row->qty - 1);
+        }
         return redirect()->route('frontend.giohang');
     }
 
     public function getGioHang_Tang($row_id)
     {
-        // Bổ sung code tại đây
+        $row = Cart::get($row_id);
+        // Không được tăng vượt quá 10 sản phẩm
+        if ($row->qty < 10) {
+            Cart::update($row_id, $row->qty + 1);
+        }
         return redirect()->route('frontend.giohang');
     }
 
     public function postGioHang_CapNhat(Request $request)
     {
-        // Bổ sung code tại đây
+        foreach ($request->qty as $row_id => $quantity) {
+            if ($quantity <= 0)
+                Cart::update($row_id, 1);
+            else if ($quantity > 10)
+                Cart::update($row_id, 10);
+            else
+                Cart::update($row_id, $quantity);
+        }
         return redirect()->route('frontend.giohang');
     }
 
@@ -109,44 +186,5 @@ class HomeController extends Controller
     public function getDangNhap()
     {
         return view('user.dangnhap');
-    }
-
-    public function getDatHangDemo()
-    {
-        //them don hang
-        $donhang = new DonHang();
-        $donhang->user_id = Auth::user()->id;
-        $donhang->tinhtrang_id = 1;
-        $donhang->dienthoaigiaohang = '0123456789';
-        $donhang->diachigiaohang = 'An Giang';
-        $donhang->save();
-
-<<<<<<< HEAD
-        //them don hang chi tiet
-        $dhct = new DonHang_ChiTiet();
-        $dhct->donhang_id = $donhang->id;
-        $dhct->sanpham_id = 5;
-        $dhct->soluongban = 1;
-        $dhct->dongiaban = 1000000;
-        $dhct->save();
-
-        $dhct = new DonHang_ChiTiet();
-        $dhct->donhang_id = $donhang->id;
-        $dhct->sanpham_id = 6;
-        $dhct->soluongban = 2;
-        $dhct->dongiaban = 2000000;
-        $dhct->save();
-
-        Mail::to(Auth::user()->email)->send(new DatHangEmail($donhang));
-        return redirect()->route('donhang');
-=======
-        $donhang_chitiet->soluongban = 1;
-        $donhang_chitiet->dongiaban = 350000;
-        $donhang_chitiet->save();
-        // Gởi email
-        Mail::to(Auth::user()->email)->send(new DatHangThanhCongEmail($donhang));
-        
-        return redirect()->route('frontend');
->>>>>>> eb0564399e36730454d1328ad4e78b4dc47a6a2f
     }
 }
