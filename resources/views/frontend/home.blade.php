@@ -9,7 +9,7 @@
 				<div class="px-4 pe-sm-0 ps-sm-5">
 					<span class="badge bg-danger">Khuyến mãi đặc biệt</span>
 					<h3 class="mt-4 mb-1 text-body fw-light">Sản phẩm mới 100%</h3>
-					<h2 class="mb-1">iPad Pro Bản Mới</h2>
+					<h2 class="mb-1">PC Bản Mới</h2>
 					<p class="h5 text-body fw-light">Số lượng sản phẩm có hạn!</p>
 					<a class="btn btn-accent" href="#">Xem chi tiết<i class="ci-arrow-right fs-ms ms-1"></i></a>
 				</div>
@@ -25,42 +25,82 @@
 			data-carousel-options="{ &quot;nav&quot;: false, &quot;controls&quot;: false, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;loop&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;360&quot;:{&quot;items&quot;:2},&quot;600&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/13.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/13.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/14.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/14.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/17.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/17.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/16.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/16.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/15.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/15.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/18.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/18.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/19.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/19.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 			<div>
 				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
-					<img class="d-block mx-auto" src="{{ asset('public/img/brands/20.png') }}" style="width:165px;" />
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/20.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/21.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/22.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/23.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/24.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/25.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/26.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/27.webp') }}" style="width:165px;" />
+				</a>
+			</div>
+			<div>
+				<a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right:-.0625rem;">
+					<img class="d-block mx-auto" src="{{ asset('public/img/brands/28.webp') }}" style="width:165px;" />
 				</a>
 			</div>
 		</div>

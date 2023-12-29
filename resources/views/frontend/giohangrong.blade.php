@@ -4,9 +4,9 @@
 <div class="container py-5 mb-lg-3">
 	<div class="row justify-content-center pt-lg-4 text-center">
 		<div class="col-lg-7 col-md-8 col-sm-9">
-			<img class="d-block mx-auto mb-5" src="{{ asset('public/img/empty.png') }}" width="340" />
-			<h1 class="h3">Giỏ hàng rỗng</h1>
-			<h3 class="h5 fw-normal mb-4">Xin vui lòng ghé thăm cửa hàng và tiến hành chọn sản phẩm.</h3>
+			<img class="d-block mx-auto mb-5" src="{{ asset('public/img/empty-cart.webp') }}" width="340" />
+			<h1 class="h3">Giỏ hàng đang rỗng</h1>
+			<h3 class="h5 fw-normal mb-4">Bạn gì ơi, hãy ghé thăm cửa hàng và chọn sản phẩm giúp shop nhé~</h3>
 			<p class="fs-md mb-4">
 				<u>Dưới đây là một số liên kết gợi ý:</u>
 			</p>

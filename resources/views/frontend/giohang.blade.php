@@ -103,10 +103,17 @@
 
 					</div>
 
+					<form method="POST" action="check_coupon">
+						<input type="text" class="form-control" placeholder="Nhập mã giảm giá">
+						<input type="submit" class="btn btn-defaut check_coupon" name="check_coupon" value="Tính mã giảm giá">
+					</form>
+					
 					<a class="btn btn-primary btn-shadow d-block w-100 mt-4" href="{{ route('user.dathang') }}">
 
 						<i class="ci-card fs-lg me-2"></i>Thanh toán
+
 					</a>
+					
 				</div>
 			</div>
 

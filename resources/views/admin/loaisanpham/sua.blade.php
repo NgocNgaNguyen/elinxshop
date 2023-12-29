@@ -3,13 +3,13 @@
 <div class="card">
    <div class="card-header">Sửa loại sản phẩm</div>
    <div class="card-body">
-      <form action="{{ route('admin.loaisanpham.sua', ['id' => $tenloai->id]) }}" method="post">
+      <form action="{{ route('admin.loaisanpham.sua', ['id' => $loaisanpham->id]) }}" method="post">
          @csrf
 
          <div class="mb-3">
             <label class="form-label" for="tenloai">Tên loại</label>
          </div>
-         <input type="text" class="form-control @error('tenloai') is-invalid @enderror" id="tenloai" name="tenloai" value="{{ $tenloai->tenloai }} " />
+         <input type="text" class="form-control @error('tenloai') is-invalid @enderror" id="tenloai" name="tenloai" value="{{ $loaisanpham->tenloai }} " />
          @error('tenloai')
          <div class="invalid-feedback"> <strong>{{$message}}</strong> </div>
          @enderror

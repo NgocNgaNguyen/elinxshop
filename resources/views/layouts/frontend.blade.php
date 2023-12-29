@@ -19,9 +19,9 @@
 	<title>@yield('title', 'Trang chủ') - {{ config('app.name', 'Laravel') }}</title>
 
 	<!-- Favicon and Touch Icons -->
-	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('public/img/apple-touch-icon.png') }}" />
-	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('public/img/favicon-32x32.png') }}" />
-	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/img/favicon-16x16.png') }}" />
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('public/img/iconelinx.png') }}" />
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('public/img/logologo.png') }}" />
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/img/logo16.png') }}" />
 
 	<!-- CSS -->
 	<link rel="stylesheet" media="screen" href="{{ asset('public/vendor/simplebar/simplebar.min.css') }}" />
@@ -39,7 +39,7 @@
 				<div class="navbar navbar-expand-lg navbar-light">
 					<div class="container">
 						<a class="navbar-brand d-none d-sm-block flex-shrink-0" href="{{ route('frontend.home') }}">
-							<img src="{{ asset('public/img/logo-dark.png') }}" width="142" />
+							<img src="{{ asset('public/img/logodark.png') }}" width="142" />
 						</a>
 						<a class="navbar-brand d-sm-none flex-shrink-0 me-2" href="{{ route('frontend.home') }}">
 							<img src="{{ asset('public/img/logo-icon.png') }}" width="74" />
@@ -130,7 +130,8 @@
 				<div class="row pb-2">
 					<div class="col-md-6 text-center text-md-start mb-4">
 						<div class="text-nowrap mb-4">
-							<a class="d-inline-block align-middle mt-n1 me-3" href="#"><img class="d-block" src="{{ asset('public/img/footer-logo-light.png') }}" width="117" /></a>
+							<a class="d-inline-block align-middle mt-n1 me-3" href="#"><img class="d-block" src="{{ asset('public/img/footerlogolight.png') }}" width="117" /></a>
+							<!-- <img src="{{ asset('public/img/logodark.png') }}" width="142" /> -->
 						</div>
 						<div class="widget widget-links widget-light">
 							<ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
@@ -152,7 +153,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pb-4 fs-xs text-light opacity-50 text-center text-md-start">Bản quyền © 2023 bởi Tui nè.</div>
+				<div class="pb-4 fs-xs text-light opacity-50 text-center text-md-start">Bản quyền © 2023 bởi eLinx.</div>
 			</div>
 		</div>
 	</footer>

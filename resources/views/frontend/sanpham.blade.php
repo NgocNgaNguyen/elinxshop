@@ -83,9 +83,9 @@
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-gift me-2"></i>Sản phẩm</a>
 									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="#">Điện thoại</a></li>
-										<li><a class="dropdown-item" href="#">Máy tính bảng</a></li>
-										<li><a class="dropdown-item" href="#">Máy tính xách tay</a></li>
+										<li><a class="dropdown-item" href="#">Bàn phím</a></li>
+										<li><a class="dropdown-item" href="#">Chuột</a></li>
+										<li><a class="dropdown-item" href="#">Ổ cứng</a></li>
 									</ul>
 								</li>
 								<li class="nav-item">
