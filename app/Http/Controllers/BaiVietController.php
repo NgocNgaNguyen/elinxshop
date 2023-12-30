@@ -31,10 +31,10 @@ class BaiVietController extends Controller
         $orm = new BaiViet();
         $orm->chude_id = $request->chude_id;
         $orm->nguoidung_id = Auth::user()->id;
+
         $orm->tieude = $request->tieude;
         $orm->tieude_slug = Str::slug($request->tieude, '-');
-        if (!empty($request->tomtat))
-            $orm->tomtat = $request->tomtat;
+        if (!empty($request->tomtat)) $orm->tomtat = $request->tomtat;
         $orm->noidung = $request->noidung;
         $orm->save();
         // Sau khi thêm thành công thì tự động chuyển về trang danh sách
@@ -73,6 +73,7 @@ class BaiVietController extends Controller
     }
     public function getKiemDuyet($id)
     {
+
         $orm = BaiViet::find($id);
         $orm->kiemduyet = 1 - $orm->kiemduyet;
         $orm->save();

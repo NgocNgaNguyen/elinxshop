@@ -22,4 +22,5 @@ class BaiViet extends Model
     {
         return $this->hasMany(BinhLuanBaiViet::class, 'baiviet_id', 'id');
     }
+
 }

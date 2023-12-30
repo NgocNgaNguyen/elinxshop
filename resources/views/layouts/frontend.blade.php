@@ -102,9 +102,9 @@
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="{{ route('frontend.sanpham') }}" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-gift me-2"></i>Sản phẩm</a>
 									<ul class="dropdown-menu">
-										<li><a class="dropdown-item" href="{{ route('frontend.sanpham.phanloai', ['tenloai_slug' => 'dien-thoai']) }}">Điện thoại</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.sanpham.phanloai', ['tenloai_slug' => 'may-tinh-bang']) }}">Máy tính bảng</a></li>
-										<li><a class="dropdown-item" href="{{ route('frontend.sanpham.phanloai', ['tenloai_slug' => 'may-tinh-xac-tay']) }}">Máy tính xách tay</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.sanpham.phanloai', ['tenloai_slug' => 'chuot']) }}">Chuột</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.sanpham.phanloai', ['tenloai_slug' => 'ban-phim']) }}">Bàn phím</a></li>
+										<li><a class="dropdown-item" href="{{ route('frontend.sanpham.phanloai', ['tenloai_slug' => 'nguon-may-tinh']) }}">Nguồn máy tính</a></li>
 									</ul>
 								</li>
 								<li class="nav-item">

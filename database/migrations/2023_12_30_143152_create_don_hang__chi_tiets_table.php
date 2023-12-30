@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donhang_chitiet', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('donhang_id')->constrained('donhang');
-            $table->foreignId('sanpham_id')->constrained('sanpham');
-            $table->integer('soluongban');
-            $table->double('dongiaban');
-            $table->timestamps();
-            $table->engine = 'InnoDB';
+			$table->id();
+			$table->foreignId('donhang_id')->constrained('donhang');
+			$table->foreignId('sanpham_id')->constrained('sanpham');
+			$table->integer('soluongban');
+			$table->double('dongiaban');
+			$table->timestamps();
+			$table->engine = 'InnoDB';
 
         });
     }

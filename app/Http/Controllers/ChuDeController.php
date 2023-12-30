@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChuDe;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ChuDeController extends Controller
 {
@@ -48,6 +48,7 @@ class ChuDeController extends Controller
         // Sau khi sửa thành công thì tự động chuyển về trang danh sách
         return redirect()->route('admin.chude');
     }
+
     public function getXoa($id)
     {
         $orm = ChuDe::find($id);

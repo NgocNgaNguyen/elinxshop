@@ -20,9 +20,6 @@ return new class extends Migration
             $table->string('tensanpham_slug');
             $table->integer('soluong');
             $table->double('dongia');
-            $table->double('khuyenmai');
-            $table->double('dongia_khuyenmai');
-            $table->string('baohanh')->nullable();
             $table->string('hinhanh')->nullable();
             $table->text('motasanpham')->nullable();
             $table->timestamps();

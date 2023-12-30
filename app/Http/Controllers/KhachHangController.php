@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\NguoiDung;
 use App\Models\DonHang;
 use App\Models\DonHang_ChiTiet;
+use App\Mail\DatHangThanhCongEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -50,13 +52,19 @@ class KhachHangController extends Controller
             $ct->dongiaban = $value->price;
             $ct->save();
         }
+        Mail::to(Auth::user()->email)->send(new DatHangThanhCongEmail($dh));
         return redirect()->route('user.dathangthanhcong');
+        
+        
+        
     }
     public function getDatHangThanhCong()
     {
         // Xóa giỏ hàng khi hoàn tất đặt hàng
         Cart::destroy();
+        
         return view('user.dathangthanhcong');
+
     }
     public function getDonHang($id = '')
     {

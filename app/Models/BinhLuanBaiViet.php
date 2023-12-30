@@ -11,6 +11,7 @@ class BinhLuanBaiViet extends Model
 {
     protected $table = 'binhluanbaiviet';
     public function BaiViet(): BelongsTo
+
     {
         return $this->belongsTo(BaiViet::class, 'baiviet_id', 'id');
     }

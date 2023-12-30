@@ -24,7 +24,9 @@ class BinhLuanBaiVietController extends Controller
         // Kiểm tra
         $request->validate([
             'baiviet_id' => ['required', 'integer'],
-            'noidungbinhluan' => ['required', 'string', 'min:20'],]);
+            'noidungbinhluan' => ['required', 'string', 'min:20'],
+
+        ]);
         $orm = new BinhLuanBaiViet();
         $orm->baiviet_id = $request->baiviet_id;
         $orm->nguoidung_id = Auth::user()->id;
@@ -64,6 +66,7 @@ class BinhLuanBaiVietController extends Controller
     {
         $orm = BinhLuanBaiViet::find($id);
         $orm->kiemduyet = 1 - $orm->kiemduyet;
+
         $orm->save();
         return redirect()->route('admin.binhluanbaiviet');
     }

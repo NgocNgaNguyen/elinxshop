@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donhang', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('nguoidung_id')->constrained('nguoidung');
-            // $table->foreignId('tinhtrang_id')->constrained('tinhtrang');
-            $table->string('dienthoaigiaohang', 10);
-            $table->string('diachigiaohang');
-            $table->string('tinhtrang')->nullable();
-            $table->timestamps();
-            $table->engine = 'InnoDB';
+			$table->id();
+			$table->foreignId('nguoidung_id')->constrained('nguoidung');
+			$table->foreignId('tinhtrang_id')->constrained('tinhtrang');
+			$table->string('dienthoaigiaohang', 20);
+			$table->string('diachigiaohang');
+			$table->timestamps();
+			$table->engine = 'InnoDB';
 
         });
     }
