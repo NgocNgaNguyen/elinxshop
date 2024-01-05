@@ -45,8 +45,24 @@
 							<img src="{{ asset('public/img/logo-icon.png') }}" width="74" />
 						</a>
 						<div class="input-group d-none d-lg-flex mx-4">
-							<input class="form-control rounded-end pe-5" type="text" placeholder="Tìm kiếm" />
-							<i class="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
+							<!-- <form class="form-control rounded-end pe-1" method="get" action="{{ route('frontend.search') }}">
+								
+								<div class="input-group">
+									<input class="form-control border-0 rounded-start pe-5 input-group-sm" type="text" name="key" placeholder="Tìm kiếm" />
+									<div class="input-group-prepend">
+										<button class="btn btn-link" type="submit">
+											<i class="ci-search text-muted fs-base me-2"></i>
+										</button>
+									</div>	
+								</div>
+							</form> -->
+							<form action="{{ url('search') }}" method="get" role="search"
+								<div class="input-group">
+								<input type="search" name="search" value="" placeholder="Tìm kiếm" class="form-control"/>
+								<button class="btn btn-link" type="submit">
+									<i class="ci-search text-muted fs-base me-2"></i>
+								</button>
+							</form>	
 						</div>
 						<div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
 							<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

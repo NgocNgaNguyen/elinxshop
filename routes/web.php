@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChuDeController;
 use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\BinhLuanBaiVietController;
+use App\Models\SanPham;
 use Illuminate\Support\Facades\Auth;
 
     Auth::routes();
@@ -47,6 +48,9 @@ use Illuminate\Support\Facades\Auth;
 
     // Liên hệ
     Route::get('/lien-he', [HomeController::class, 'getLienHe'])->name('lienhe');
+
+     //Tìm kiếm
+     Route::get('/search', [HomeController::class, 'getSearch'])->name('search');
 });
 // --Trang khách hàng
     Route::get('/khach-hang/dang-ky', [HomeController::class, 'getDangKy'])->name('user.dangky');
@@ -72,6 +76,10 @@ use Illuminate\Support\Facades\Auth;
 
     // Đăng xuất
     Route::post('/dang-xuat', [KhachHangController::class, 'postDangXuat'])->name('dangxuat');
+
+    
+   
+    
 });
 // Trang tài khoản quản lý
     Route::prefix('admin')->name('admin.')->middleware(['auth','manager'])->group(function () {

@@ -7,6 +7,7 @@ use App\Models\BaiViet;
 use App\Models\DonHang;
 use App\Models\DonHang_ChiTiet;
 use App\Mail\DatHangEmail;
+use App\Mail\DatHangThanhCongEmail;
 use App\Models\LoaiSanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -19,7 +20,7 @@ use Exception;
 use App\Models\SanPham;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-
+use function Laravel\Prompts\search;
 
 class HomeController extends Controller
 {
@@ -57,6 +58,7 @@ class HomeController extends Controller
             return redirect()->route('user.home');
         }
     }
+
     public function getHome()
     {
         $loaisanpham = LoaiSanPham::all();
@@ -214,5 +216,20 @@ class HomeController extends Controller
         Auth::logout();
         return redirect()->route('admin.home');
     }
+    // public function getSearch(Request $request)
+    // {
+    //     // if($request->search){
+    //     //     $getSearch - SanPham::where('tensanpham', 'LIKE', '%'.$request->search.'%' )->latest()->paginate(15);
+    //     //     return view('frontend.search', compact('getSearch'));
+    //     // }else{
+    //     //     return redirect()->back()->with('message','Sản phẩm không tồn tại!');
+    //     // }
+        
+    //     $key = $request->key;
+        
+    //     $sanpham = SanPham::where('tensanpham', 'like', '%'.$key.'%')->get();
+        
+    //     return view('frontend.search', compact('sanpham'));
+    // }
     
 }

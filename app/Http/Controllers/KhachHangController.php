@@ -13,6 +13,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
+
 class KhachHangController extends Controller
 {
     public function getHome()
@@ -103,4 +104,5 @@ class KhachHangController extends Controller
         // Bổ sung code tại đây
         return redirect()->route('frontend.home');
     }
+   
 }
