@@ -2,29 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ChuDe;
-use App\Models\BaiViet;
+use Socialite;
 use App\Models\DonHang;
 use App\Models\DonHang_ChiTiet;
 use App\Mail\DatHangEmail;
 use App\Mail\DatHangThanhCongEmail;
 use App\Models\LoaiSanPham;
+use App\Models\HangSanXuat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use App\Models\NguoiDung;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Socialite;
-use Exception;
 use App\Models\SanPham;
+use App\Models\ChuDe;
+use App\Models\NguoiDung;
+use App\Models\BaiViet;
+use App\Models\BaiViet_ChiTiet;
+use App\Models\TuyenDung;
 use Gloudemans\Shoppingcart\Facades\Cart;
-
-use function Laravel\Prompts\search;
 
 class HomeController extends Controller
 {
-
     public function getGoogleLogin()
     {
         return Socialite::driver('google')->redirect();
@@ -51,9 +48,7 @@ class HomeController extends Controller
                 'email' => $user->email,
                 'username' => Str::before($user->email, '@'),
                 'password' => Hash::make('elinxshop@2023'), // Gán mật khẩu tự do
-            ]);
-
-            // Sau đó đăng nhập
+            ]); // Sau đó đăng nhập
             Auth::login($newUser, true);
             return redirect()->route('user.home');
         }
@@ -62,21 +57,41 @@ class HomeController extends Controller
     public function getHome()
     {
         $loaisanpham = LoaiSanPham::all();
-        return view('frontend.home', compact('loaisanpham'));
+        $hangsanxuat = HangSanXuat::all();
+        return view('frontend.home', compact('loaisanpham', 'hangsanxuat'));
     }
-
     public function getSanPham($tenloai_slug = '')
     {
-        // Bổ sung code tại đây
-        return view('frontend.sanpham');
-    }
+        // Lấy thông tin loại sản phẩm dựa trên tenloai_slug
+        $loaisanpham = LoaiSanPham::where('tenloai_slug', $tenloai_slug)->first();
 
+        // Nếu không tìm thấy loại sản phẩm, có thể xử lý tùy chọn như hiển thị trang lỗi hoặc chuyển hướng
+        if (!$loaisanpham) {
+            abort(404); // Trả về trang 404 Not Found
+        }
+
+        // Lấy danh sách sản phẩm thuộc loại sản phẩm
+        $dssp = SanPham::where('loaisanpham_id', $loaisanpham->id)->get();
+
+        // Truyền loại sản phẩm và danh sách sản phẩm vào view bằng compact
+        return view('frontend.sanpham', compact('loaisanpham', 'dssp'));
+    }
     public function getSanPham_ChiTiet($tenloai_slug = '', $tensanpham_slug = '')
     {
-        // Bổ sung code tại đây
-        return view('frontend.sanpham_chitiet');
-    }
 
+        // Tìm thông tin sản phẩm dựa trên các tham số nhận được
+        $sanpham = SanPham::join('loaisanpham', 'sanpham.loaisanpham_id', '=', 'loaisanpham.id')
+            ->where('loaisanpham.tenloai_slug', $tenloai_slug)
+            ->where('sanpham.tensanpham_slug', $tensanpham_slug)
+            ->first();
+
+        // Kiểm tra xem sản phẩm có tồn tại không
+        if (!$sanpham) {
+            abort(404); // Trả về trang 404 Not Found
+        }
+
+        return view('frontend.sanpham_chitiet', compact('sanpham'));
+    }
     public function getBaiViet($tenchude_slug = '')
     {
         if (empty($tenchude_slug)) {
@@ -86,8 +101,7 @@ class HomeController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->paginate(20);
         } else {
-            $chude = ChuDe::where('tenchude_slug', $tenchude_slug)
-                ->firstOrFail();
+            $chude = ChuDe::where('tenchude_slug', $tenchude_slug)->firstOrFail();
             $title = $chude->tenchude;
             $baiviet = BaiViet::where('kichhoat', 1)
                 ->where('kiemduyet', 1)
@@ -97,7 +111,6 @@ class HomeController extends Controller
         }
         return view('frontend.baiviet', compact('title', 'baiviet'));
     }
-
     public function getBaiViet_ChiTiet($tenchude_slug = '', $tieude_slug = '')
     {
         $tieude_id = explode('.', $tieude_slug);
@@ -107,10 +120,10 @@ class HomeController extends Controller
             ->where('kiemduyet', 1)
             ->where('id', $baiviet_id)
             ->firstOrFail();
-        if (!$baiviet) abort(404);
+        if (!$baiviet)
+            abort(404);
         // Cập nhật lượt xem
         $daxem = 'BV' . $baiviet_id;
-
         if (!session()->has($daxem)) {
             $orm = BaiViet::find($baiviet_id);
             $orm->luotxem = $baiviet->luotxem + 1;
@@ -132,15 +145,14 @@ class HomeController extends Controller
         else
             return view('frontend.giohangrong');
     }
-
     public function getGioHang_Them($tensanpham_slug = '')
     {
         $sanpham = SanPham::where('tensanpham_slug', $tensanpham_slug)->first();
         Cart::add([
             'id' => $sanpham->id,
             'name' => $sanpham->tensanpham,
-            'price' => $sanpham->dongia,
             'qty' => 1,
+            'price' => $sanpham->dongia,
             'weight' => 0,
             'options' => [
                 'image' => $sanpham->hinhanh
@@ -148,13 +160,11 @@ class HomeController extends Controller
         ]);
         return redirect()->route('frontend.home');
     }
-
     public function getGioHang_Xoa($row_id)
     {
         Cart::remove($row_id);
         return redirect()->route('frontend.giohang');
     }
-
     public function getGioHang_Giam($row_id)
     {
         $row = Cart::get($row_id);
@@ -164,7 +174,6 @@ class HomeController extends Controller
         }
         return redirect()->route('frontend.giohang');
     }
-
     public function getGioHang_Tang($row_id)
     {
         $row = Cart::get($row_id);
@@ -174,7 +183,6 @@ class HomeController extends Controller
         }
         return redirect()->route('frontend.giohang');
     }
-
     public function postGioHang_CapNhat(Request $request)
     {
         foreach ($request->qty as $row_id => $quantity) {
@@ -185,26 +193,21 @@ class HomeController extends Controller
             else
                 Cart::update($row_id, $quantity);
         }
-
         return redirect()->route('frontend.giohang');
     }
-
     public function getTuyenDung()
     {
         return view('frontend.tuyendung');
     }
-
     public function getLienHe()
     {
         return view('frontend.lienhe');
     }
-
     // Trang đăng ký dành cho khách hàng
     public function getDangKy()
     {
         return view('user.dangky');
     }
-
     // Trang đăng nhập dành cho khách hàng
     public function getDangNhap()
     {
@@ -216,20 +219,14 @@ class HomeController extends Controller
         Auth::logout();
         return redirect()->route('admin.home');
     }
-    // public function getSearch(Request $request)
-    // {
-    //     // if($request->search){
-    //     //     $getSearch - SanPham::where('tensanpham', 'LIKE', '%'.$request->search.'%' )->latest()->paginate(15);
-    //     //     return view('frontend.search', compact('getSearch'));
-    //     // }else{
-    //     //     return redirect()->back()->with('message','Sản phẩm không tồn tại!');
-    //     // }
-        
-    //     $key = $request->key;
-        
-    //     $sanpham = SanPham::where('tensanpham', 'like', '%'.$key.'%')->get();
-        
-    //     return view('frontend.search', compact('sanpham'));
-    // }
-    
+    // Trong Controller
+    public function getSearch(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $sanpham = SanPham::where('tensanpham', 'like', '%' . $keyword . '%')
+                            ->with('loaisanpham') 
+                            ->paginate(8);
+                        
+        return view('frontend.search', ['sanpham' => $sanpham]);
+    }
 }

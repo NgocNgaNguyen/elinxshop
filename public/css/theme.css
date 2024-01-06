@@ -5153,7 +5153,25 @@ textarea.form-control-lg {
 	--cz-accordion-active-color: #373f50;
 	--cz-accordion-active-bg: transparent;
 }
+.pagination-sm .page-item .page-link {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.875rem; /* Điều chỉnh kích thước chữ */
+}
 
+/* Nút trang được chọn */
+.pagination-sm .page-item.active .page-link {
+    z-index: 3; /* Để nút trang đang được chọn lớn hơn nền */
+}
+
+/* Nút trang trước và sau */
+.pagination-sm .page-item .page-link:focus {
+    box-shadow: none; /* Loại bỏ đường viền khi nút trang được nhấn */
+}
+
+/* Màu chữ cho các nút trang */
+.pagination-sm .page-item .page-link {
+    color: #007bff; /* Màu chữ mặc định của Bootstrap */
+}
 .accordion-button {
 	position: relative;
 	display: flex;

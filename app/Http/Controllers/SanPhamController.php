@@ -129,11 +129,4 @@ class SanPhamController extends Controller
         if (!empty($orm->hinhanh)) Storage::delete($orm->hinhanh);
         return redirect()->route('admin.sanpham');
     }
-    public function getSearch(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        $loaisanpham = LoaiSanPham::all();
-
-        return view('frontend.search', compact('loaisanpham', 'keyword'));
-    }
 }

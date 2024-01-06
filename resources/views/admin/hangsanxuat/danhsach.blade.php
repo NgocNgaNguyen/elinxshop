@@ -9,7 +9,7 @@
             <a href="{{ route('admin.hangsanxuat.xuat') }}" class="btn btn-success"><i class="fa-light fa-download"></i> Xuất ra Excel</a>
 
     </p>
-   {{ $hangsanxuat->links()}}
+   {{ $hangsanxuat->links('vendor.pagination.bootstrap-4-custom')}}
       <table class="table table-bordered table-hover table-sm mb-0">
       <thead>
       <tr>
@@ -36,7 +36,7 @@
       </tbody>
       </table>
 
-      {{ $hangsanxuat->links()}}
+      {{ $hangsanxuat->links('vendor.pagination.bootstrap-4-custom')}}
 
  </div>
  </div>
