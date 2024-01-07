@@ -9,7 +9,7 @@
             <a href="{{ route('admin.hangsanxuat.xuat') }}" class="btn btn-success"><i class="fa-light fa-download"></i> Xuất ra Excel</a>
 
     </p>
-   {{ $hangsanxuat->links('vendor.pagination.bootstrap-4-custom')}}
+   <!-- {{ $hangsanxuat->links('vendor.pagination.bootstrap-4-custom')}} -->
       <table class="table table-bordered table-hover table-sm mb-0">
       <thead>
       <tr>

@@ -81,6 +81,7 @@ use Illuminate\Support\Facades\Auth;
    
     
 });
+
 // Trang tài khoản quản lý
     Route::prefix('admin')->name('admin.')->middleware(['auth','manager'])->group(function () {
     // Trang chủ
@@ -162,63 +163,4 @@ use Illuminate\Support\Facades\Auth;
 
     Route::post('/dang-xuat', [HomeController::class, 'postDangXuat'])->name('dangxuat');
 });
-   //-------
-//{
-// // Trang chủ
-// Route::get('/', [HomeController::class, 'getHome'])->name('frontend');
-// Route::get('/home', [HomeController::class, 'getHome'])->name('frontend');
 
-// //{
-// Route::get('/dathangemail' et('/lham', [LoaiSanPhamController::class, 'getDanhSach'])->name('loaisanpham');
-// Route::get('/loaisanpham/them', [LoaiSanPhamController::class, 'getThem'])->name('loaisanpham.them');
-// Route::post('/loaisanpham/them', [LoaiSanPhamController::class, 'postThem'])->name('loaisanpham.them');
-// Route::get('/loaisanpham/sua/{id}', [LoaiSanPhamController::class, 'getSua'])->name('loaisanpham.sua');
-// Route::post('/loaisanpham/sua/{id}', [LoaiSanPhamController::class, 'postSua'])->name('loaisanpham.sua');
-// Route::get('/loaisanpham/xoa/{id}', [LoaiSanPhamController::class, 'getXoa'])->name('loaisanpham.xoa');
-// // Quản lý Hãng sản xuất
-// Route::get('/hangsanxuat', [HangSanXuatController::class, 'getDanhSach'])->name('hangsanxuat');
-// Route::get('/hangsanxuat/them', [HangSanXuatController::class, 'getThem'])->name('hangsanxuat.them');
-// Route::post('/hangsanxuat/them', [HangSanXuatController::class, 'postThem'])->name('hangsanxuat.them');
-// Route::get('/hangsanxuat/sua/{id}', [HangSanXuatController::class, 'getSua'])->name('hangsanxuat.sua');
-// Route::post('/hangsanxuat/sua/{id}', [HangSanXuatController::class, 'postSua'])->name('hangsanxuat.sua');
-// Route::get('/hangsanxuat/xoa/{id}', [HangSanXuatController::class, 'getXoa'])->name('hangsanxuat.xoa');
-// //
-// Route::post('/hangsanxuat/nhap', [HangSanXuatController::class, 'postNhap'])->name('hangsanxuat.nhap');
-// Route::get('/hangsanxuat/xuat', [HangSanXuatController::class, 'getXuat'])->name('hangsanxuat.xuat');
-// // Quản lý Sản phẩm
-// Route::get('/sanpham', [SanPhamController::class, 'getDanhSach'])->name('sanpham');
-// Route::get('/sanpham/them', [SanPhamController::class, 'getThem'])->name('sanpham.them');
-// Route::post('/sanpham/them', [SanPhamController::class, 'postThem'])->name('sanpham.them');
-// Route::get('/sanpham/sua/{id}', [SanPhamController::class, 'getSua'])->name('sanpham.sua');
-// Route::post('/sanpham/sua/{id}', [SanPhamController::class, 'postSua'])->name('sanpham.sua');
-// Route::get('/sanpham/xoa/{id}', [SanPhamController::class, 'getXoa'])->name('sanpham.xoa');
-// //
-// Route::post('/sanpham/nhap}', [SanPhamController::class, 'postNhap'])->name('sanpham.nhap');
-// Route::get('/sanpham/xuat}', [SanPhamController::class, 'getXuat'])->name('sanpham.xuat');
-// // Quản lý Tình trạng
-// Route::get('/tinhtrang', [TinhTrangController::class, 'getDanhSach'])->name('tinhtrang');
-// Route::get('/tinhtrang/them', [TinhTrangController::class, 'getThem'])->name('tinhtrang.them');
-// Route::post('/tinhtrang/them', [TinhTrangController::class, 'postThem'])->name('tinhtrang.them');
-// Route::get('/tinhtrang/sua/{id}', [TinhTrangController::class, 'getSua'])->name('tinhtrang.sua');
-// Route::post('/tinhtrang/sua/{id}', [TinhTrangController::class, 'postSua'])->name('tinhtrang.sua');
-// Route::get('/tinhtrang/xoa/{id}', [TinhTrangController::class, 'getXoa'])->name('tinhtrang.xoa');
-// // Quản lý Đơn hàng
-// Route::get('/donhang', [DonHangController::class, 'getDanhSach'])->name('donhang');
-// Route::get('/donhang/them', [DonHangController::class, 'getThem'])->name('donhang.them');
-// Route::post('/donhang/them', [DonHangController::class, 'postThem'])->name('donhang.them');
-// Route::get('/donhang/sua/{id}', [DonHangController::class, 'getSua'])->name('donhang.sua');
-// Route::post('/donhang/sua/{id}', [DonHangController::class, 'postSua'])->name('donhang.sua');
-// Route::get('/donhang/xoa/{id}', [DonHangController::class, 'getXoa'])->name('donhang.xoa');
-// // Quản lý Đơn hàng chi tiết
-// Route::get('/donhang/chitiet', [DonHangChiTietController::class, 'getDanhSach'])->name('donhang.chitiet');
-// Route::get('/donhang/chitiet/sua/{id}', [DonHangChiTietController::class, 'getSua'])->name('donhang.chitiet.sua');
-// Route::post('/donhang/chitiet/sua/{id}', [DonHangChiTietController::class, 'postSua'])->name('donhang.chitiet.sua');
-// Route::get('/donhang/chitiet/xoa/{id}', [DonHangChiTietController::class, 'getXoa'])->name('donhang.chitiet.xoa');
-// // Quản lý Tài khoản người dùng
-// Route::get('/nguoidung', [UserController::class, 'getDanhSach'])->name('nguoidung');
-// Route::get('/nguoidung/them', [UserController::class, 'getThem'])->name('nguoidung.them');
-// Route::post('/nguoidung/them', [UserController::class, 'postThem'])->name('nguoidung.them');
-// Route::get('/nguoidung/sua/{id}', [UserController::class, 'getSua'])->name('nguoidung.sua');
-// Route::post('/nguoidung/sua/{id}', [UserController::class, 'postSua'])->name('nguoidung.sua');
-// Route::get('/nguoidung/xoa/{id}', [UserController::class, 'getXoa'])->name('nguoidung.xoa');
-//}

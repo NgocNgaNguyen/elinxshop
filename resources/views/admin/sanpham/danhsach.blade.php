@@ -10,7 +10,7 @@
 
         </p>
 
-        {{$sanpham->links('vendor.pagination.bootstrap-4-custom')}}
+        <!-- {{$sanpham->links('vendor.pagination.bootstrap-4-custom')}} -->
 
 
         <table class="table table-bordered table-hover table-sm mb-0">

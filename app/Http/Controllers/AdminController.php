@@ -11,5 +11,13 @@ class AdminController extends Controller
     {
         return view('admin.home');
     }
+    public function LoaiSanPham()
+    {
+        return view('admin.loaisanpham');
+    }
+    public function SanPham()
+    {
+        return view('admin.sanpham');
+    }
 
 }
