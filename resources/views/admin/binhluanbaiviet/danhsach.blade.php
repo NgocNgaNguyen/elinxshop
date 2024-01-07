@@ -4,7 +4,8 @@
     <div class="card-header">Bình luận bài viết</div>
 
     <div class="card-body table-responsive">
-        <p><a href="{{ route('admin.binhluanbaiviet.them') }}" class="btn btn-info"><i class="fa-light fa-plus"></i> Thêm mới</a></p>
+        <p><a href="{{ route('admin.binhluanbaiviet.them') }}" class="btn btn-info"><i class="fa-light fa-plus"></i>
+                Thêm mới</a></p>
         <table class="table table-bordered table-hover table-sm mb-0">
             <thead>
                 <tr>
@@ -20,9 +21,12 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $value->NguoiDung->name }}</td>
                     <td>
-                        <span class="d-block fw-bold text-primary"><a href="{{ route('admin.binhluanbaiviet.sua', ['id' => $value->id]) }}">{{ $value->BaiViet->tieude }}</a></span>
+                        <span class="d-block fw-bold text-primary"><a
+                                href="{{ route('admin.binhluanbaiviet.sua', ['id' => $value->id]) }}">{{
+                                $value->BaiViet->tieude }}</a></span>
                         <span class="d-block small">
-                            Ngày đăng: <strong>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value->created_at)->format('d/m/Y H:i:s') }}</strong>
+                            Ngày đăng: <strong>{{ Carbon\Carbon::createFromFormat('Y-m-d H:i:s',
+                                $value->created_at)->format('d/m/Y H:i:s') }}</strong>
                             <br />Nội dung bình luận: <strong>{{ $value->noidungbinhluan }}</strong>
                         </span>
                     </td>
@@ -31,9 +35,9 @@
 
                         <a href="{{ route('admin.binhluanbaiviet.kiemduyet', ['id' => $value->id]) }}">
                             @if($value->kiemduyet == 1)
-                            <i class="fa-light fa-lg fa-circle-check"></i>
+                            <i class="bi bi-check-circle"></i>
                             @else
-                            <i class="fa-light fa-lg fa-circle-xmark text-danger"></i>
+                            <i class="bi bi-x-circle"></i>
                             @endif
                         </a>
                     </td>
@@ -42,9 +46,9 @@
 
                         <a href="{{ route('admin.binhluanbaiviet.kichhoat', ['id' => $value->id]) }}">
                             @if($value->kichhoat == 1)
-                            <i class="fa-light fa-lg fa-eye"></i>
+                            <i class="bi bi-eye"></i>
                             @else
-                            <i class="fa-light fa-lg fa-eye-slash text-danger"></i>
+                            <i class="bi bi-eye-slash"></i>
                             @endif
                         </a>
                     </td>
@@ -52,14 +56,15 @@
                     <td class="text-center">
 
                         <a href="{{ route('admin.binhluanbaiviet.sua', ['id' => $value->id]) }}">
-                            <i class="fa-light fa-lg fa-edit"></i>
+                            <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
 
                     <td class="text-center">
 
-                        <a href="{{ route('admin.binhluanbaiviet.xoa', ['id' => $value->id]) }}" onclick="return confirm('Bạn có muốn xóa bình luận của bài viết {{ $value->BaiViet->tieude }} không?')">
-                            <i class="fa-light fa-lg fa-trash-alt text-danger"></i>
+                        <a href="{{ route('admin.binhluanbaiviet.xoa', ['id' => $value->id]) }}"
+                            onclick="return confirm('Bạn có muốn xóa bình luận của bài viết {{ $value->BaiViet->tieude }} không?')">
+                            <i class="bi bi-trash text-danger"></i>
                         </a>
                     </td>
                 </tr>

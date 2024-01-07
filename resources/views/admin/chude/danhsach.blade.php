@@ -3,7 +3,8 @@
 <div class="card">
     <div class="card-header">Chủ đề</div>
     <div class="card-body table-responsive">
-        <p><a href="{{ route('admin.chude.them') }}" class="btn btn-info"><i class="fa-light fa-plus"></i> Thêm mới</a></p>
+        <p><a href="{{ route('admin.chude.them') }}" class="btn btn-info"><i class="fa-light fa-plus"></i> Thêm mới</a>
+        </p>
         <table class="table table-bordered table-hover table-sm mb-0">
             <thead>
                 <tr>
@@ -21,18 +22,11 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $value->tenchude }}</td>
                     <td>{{ $value->tenchude_slug }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('admin.chude.sua', ['id' => $value->id]) }}">
-                            <i class="fa-light fa-edit"></i>
-                        </a>
-                    </td>
-
-                    <td class="text-center">
-
-                        <a href="{{ route('admin.chude.xoa', ['id' => $value->id]) }}" onclick="return confirm('Bạn có muốn xóa chủ đề {{ $value->tenchude }} không?')">
-                            <i class="fa-light fa-trash-alt text-danger"></i>
-                        </a>
-                    </td>
+                    <td class="text-center"><a href="{{ route('admin.chude.sua', ['id' => $value->id]) }}"><i
+                                class="bi bi-pencil-square"></i></a></td>
+                    <td class="text-center"><a href="{{ route('admin.chude.xoa', ['id' => $value->id]) }}"
+                            onclick="alert(confirm('Bạn chắc chắn muốn xóa '))"><i
+                                class="bi bi-trash text-danger"></i></a></td>
                 </tr>
                 @endforeach
             </tbody>
