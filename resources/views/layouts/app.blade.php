@@ -11,20 +11,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('public/img/logologo.png') }}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/img/logo16.png') }}" />
 
-<<<<<<< Updated upstream
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    
-
-
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css" />
-    <link href="{{ asset('path/to/bootstrap-icons.css') }}" rel="stylesheet">
-    
-=======
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
@@ -39,7 +25,6 @@
     <link href="{{ asset ('NiceAdmin/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset ('NiceAdmin/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset ('NiceAdmin/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
->>>>>>> Stashed changes
     @yield('css')
     <link href="{{ asset ('NiceAdmin/assets/css/style.css') }}" rel="stylesheet">
 </head>
